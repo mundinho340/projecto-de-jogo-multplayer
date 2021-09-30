@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <style>
+        #screen{
+            
+            border: 10px solid #CCC;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            image-rendering: -moz-crisp-edges;
+            width: 400px;
+            height: 400px;
+            
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu primeiro jogo multplayer</title>
+
+    
+</head>
+<body>
+    <canvas id="screen" width="10" height="10"></canvas>
+
+    <script type="module">   
+        import createGame from "./game.js"
+        import createKeyboardListener from "./keyboard-listener.js"
+        import renderScreen from "./render-screen.js"     
+            const game = createGame()
+            const keyboardListener = createKeyboardListener(document)
+            keyboardListener.subscribe(game.movePlayer)
+
+            const screen = document.getElementById("screen")
+            renderScreen(screen, game, requestAnimationFrame)
+
+            game.addPlayer({playerId:"player1", playerX:0, playerY:0})
+            game.addFruit({fruitId: "fruit1", fruitX:3, fruitY:3})
+            game.addFruit({fruitId:"fruit2", fruitX:5,fruitY:5})       
+    </script>
+</body>
+</html>
